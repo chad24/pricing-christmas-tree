@@ -23,11 +23,19 @@ export default Controller.extend({
         conditions: {
           all: [],
         },
+        actions: [],
       });
       this.rerenderJson();
     },
-    renderJson() {
+
+    removeRule(rule) {
+      const rules = this.get('model.rules');
+      rules.removeObject(rule);
       this.rerenderJson();
     },
+
+    renderJson() {
+      this.rerenderJson();
+    }
   },
 });

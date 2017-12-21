@@ -1,3 +1,9 @@
+<div class="drawer" style="position: fixed; left: 0; top: 0; bottom: 0; width: 300px; border-right: 1px solid #cacaca;">
+    <div class="drawer-entry" style="padding: 2em; background-color: #efefef; font-weight: bold;">
+        {{model.material_name}}
+    </div>
+</div>
+
 <div class="container" style="margin-top: 2em;">
     <h1>Material: {{model.material_name}}</h1>
     <h4>Material Number: {{model.material_number}}</h4>
@@ -5,15 +11,25 @@
     <div class="row" style="margin-left: 0;">
         <div style="width: 45%; float: left; margin-right: 3%; padding-top: 3em;">
             <form>
-                <button class="btn  btn-success" style="margin-bottom: 2em;" {{action 'addRule'}}>Add Rule</button>
+                <button class="btn btn-success" style="margin-bottom: 2em;" {{action 'addRule'}}>Add Rule</button>
                 {{#each rules as |rule|}}
-                    {{rule-form rule=rule dataFields=dataFields refresh=(action 'renderJson')}}
+                    <div class="rule-form-container" style="position: relative;margin-bottom: 3em; padding: 1em; border-radius: 3px; border: 1px solid rgb(56, 121, 121);">
+                        <button style="position: absolute; right: 1em; top: 1em" class="btn btn-danger" {{action 'removeRule' rule}}>Remove Rule</button>
+                        {{rule-form rule=rule dataFields=dataFields refresh=(action 'renderJson')}}
+                    </div>
                 {{/each}}
             </form>
         </div>
         <div style="width:45%; float: left;">
             <h1>Rules JSON</h1>
+            {{#if (is-clipboard-supported)}}
+                {{#copy-button clipboardTarget="#raw-json"}}
+                    Copy to Clipboard
+                {{/copy-button}}
+                <div style="margin-top: 2em; margin-bottom: 2em; "></div>
+            {{/if}}
             {{highlight-js code=json lang="json" hasLineNumbers=false}}
+            <div id="raw-json" style="position: fixed; top: -100000%; left: -10000%;">{{json}}</div>
         </div>
     </div>
 </div>

@@ -1,15 +1,14 @@
-<div class="rule-form-container" style="margin-bottom: 3em; padding: 1em; border-radius: 3px; border: 1px solid rgb(56, 121, 121);">
+
     <h2>Rule: {{rule.rule_name}}</h2>
     <div class="form-group">
-        Rule name:{{input value=rule.rule_name key-press=refresh}}
+        Rule name:{{input value=rule.rule_name key-press=refresh focus-out=refresh}}
     </div>
     <div class="form-group">
-        Rule description: {{input value=rule.rule_description key-press=refresh}}
+        Rule description: {{input value=rule.rule_description key-press=refresh focus-out=refresh}}
     </div>
 
-    <button class="btn btn-primary" {{action 'addCondition'}}>Add Condition</button>
-
     <h4>Conditions</h4>
+    <button class="btn btn-primary" {{action 'addCondition'}}>Add Condition</button>
     {{#each conditions as |condition|}}
         <div class="rules-condition-container" style="margin: 1em; padding: 1em; border: 1px solid rgb(18, 70, 70); border-radius: 3px;">
             {{rule-condition dataFields=dataFields condition=condition refresh=refresh}}
@@ -17,6 +16,11 @@
         </div>
     {{/each}}
 
-    <h4>conditions</h4>
-    
-</div>
+    <h4>Actions</h4>
+    <button class="btn btn-primary" {{action 'addAction'}}>Add Action</button>
+    {{#each ruleActions as |ruleAction|}}
+        <div class="rules-condition-container" style="margin: 1em; padding: 1em; border: 1px solid rgb(18, 70, 70); border-radius: 3px;">
+            {{rule-action ruleAction=ruleAction refresh=refresh}}
+            <button class="btn btn-danger" {{action 'removeAction' ruleAction}}>Remove Action</button>
+        </div>
+    {{/each}}
