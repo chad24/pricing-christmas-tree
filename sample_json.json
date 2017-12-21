@@ -1,0 +1,57 @@
+{
+	"material_number": "201701010111",
+	"material_type": "ZHAW",
+	"material_priority": "HIGH",
+	"output_type": "price",
+	"output_type_data": "float",
+	"data_fields": [{
+			"field_name_visible": "Product Weight",
+			"field_description": "Weight in KG",
+			"field_name": "product_weight",
+			"field_source": "json::product_weight",
+			"field_source_type": "json"
+		},
+		{
+			"field_name_visible": "Current inventory",
+			"field_description": "Inventory in units",
+			"field_name": "inventory_current_units",
+			"field_source": "json::inventory_current_units",
+			"field_source_type": "json"
+		}
+	],
+	"rules": [{
+		"rule_number": "20171213",
+		"rule_name": "Hello World Rule",
+		"rule_description": "Sets the base price",
+		"rule_type": "inventory",
+		"rule_owner": "marco.couperus@home24.de",
+		"rule_updated_datetime": "2012-04-23T18:25:43.511Z",
+		"rule_sequence_number": "1",
+		"conditions": {
+			"all": [{
+					"name": "current_inventory",
+					"condition_sequence_number": "1",
+					"type": "inventory",
+					"data_field": "inventory_current",
+					"operator": "greater_than",
+					"value": "40"
+				},
+				{
+					"name": "current_inventory",
+					"condition_sequence_number": "2",
+					"type": "inventory",
+					"data_field": "inventory_current",
+					"operator": "less_than",
+					"value": "100"
+				}
+			]
+		},
+		"actions": [{
+			"action_name": "Lower Price by 10%",
+			"action_type": "lower_price",
+			"action_sequence_number": "1",
+			"multiplier_formula": "data::price*{multiplier_value}",
+			"multiplier_value": "0.9"
+		}]
+	}]
+}
