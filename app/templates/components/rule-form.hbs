@@ -1,0 +1,12 @@
+<div class="form-group">
+    Rule name:{{input value=rule.rule_name key-press=refresh}}
+</div>
+<div class="form-group">
+    Rule description: {{input value=rule.rule_description key-press=refresh}}
+</div>
+
+<button class="btn btn-primary" {{action 'addCondition'}}>Add Condition</button>
+
+{{#each conditions as |condition|}}
+    {{rule-condition condition=condition}}
+{{/each}}

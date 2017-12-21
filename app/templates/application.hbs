@@ -1,0 +1,12 @@
+<div class="container">
+    <form>
+        <button class="btn btn-primary" {{action 'addRule'}}>Add Rule</button>
+        {{#each rules as |rule|}}
+            {{rule-form refresh=(action 'renderJson')}}
+        {{/each}}
+    </form>
+
+    <code>
+            {{json-pretty obj=model shouldHighlight=true }}
+    </code>
+</div>
