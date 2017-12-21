@@ -1,4 +1,11 @@
 <div class="form-group">
+    <label>Name</label>
+    {{input value=condition.name key-press=(action 'changeValue')}}
+</div>
+
+
+<div class="form-group">
+    <label>Data field</label>
     {{#power-select
         options=dataFields
         selected=selectedDataField
@@ -10,22 +17,30 @@
 </div>
 
 <div class="form-group">
+    <label>Operator</label>
     {{#power-select
         options=operators
-        selected=condition.operator
+        selected=selectedOperator
         onchange=(action "changeOperator")
         as |operator|
     }}
-        {{operator}}
+        {{operator.symbol}}
     {{/power-select}}
 </div>
 
 <div class="form-group">
+    <label>Value</label>
     {{input value=condition.value key-press=(action 'changeValue')}}
 </div>
+
+{{!--
+
+debug
 
 <div class="form-group">
     <code>
         {{conditionString}}
     </code>
 </div>
+
+--}}

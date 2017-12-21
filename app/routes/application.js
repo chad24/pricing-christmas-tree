@@ -4,6 +4,7 @@ export default Route.extend({
   model() {
     return {
       material_number: '201701010111',
+      material_name: 'Armlehnenstuhl Nicholas I',
       material_type: 'ZHAW',
       material_priority: 'HIGH',
       output_type: 'price',

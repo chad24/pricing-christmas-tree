@@ -15,26 +15,46 @@ export default Component.extend({
     return JSON.stringify(this.get('condition'));
   }),
 
-  dataFields: [
-    {
-      field_name: 'some_field',
-      field_name_visible: 'Some Field',
-    },
-  ],
-
-  didReceiveAttrs() {
-    if (!this.get('condition.data_field')) {
-        this.set('condition.data_field', this.get('selectedDataField.field_name'))
-    }
-  },
+  dataFields: [],
 
   selectedDataField: Ember.computed('dataFields', function() {
     return {};
   }),
 
-  selectedCondition: '>',
+  selectedOperator: Ember.computed('operators', function() {
+      return this.get('operators')[0];
+  }),
 
-  operators: ['>', '<', '>=', '<=', '==', '!='],
+  operators: [
+    {
+        symbole: '',
+        value: ''
+    },
+    {
+        symbol: '>',
+        value: 'greater_than'
+    },
+    {
+        symbol: '>=',
+        value: 'greater_than_equal_to'
+    },
+    {
+        symbol: '<',
+        value: 'less_than'
+    },
+    {
+        symbol: '<=',
+        value: 'less_than_equal_to'
+    },
+    {
+        symbol: '==',
+        value: 'equal_to'
+    },
+    {
+        symbol: '!=',
+        value: 'not_equal_to'
+    },
+  ],
 
   value: '',
 
@@ -43,15 +63,20 @@ export default Component.extend({
       this.set('selectedDataField', dataField);
       this.set('condition.data_field', dataField.field_name);
       this.notifyPropertyChange('condition');
+      this.refresh();
     },
 
     changeOperator(operator) {
-      this.set('condition.operator', operator);
+      this.set('condition.operator', operator.value);
+      this.set('selectedOperator', operator);
       this.notifyPropertyChange('condition');
+      this.refresh();
     },
 
     changeValue() {
-        Ember.run.next(() => this.notifyPropertyChange('condition'));
-    }
+      Ember.run.next(
+        () => this.notifyPropertyChange('condition') && this.refresh()
+      );
+    },
   },
 });

@@ -12,8 +12,11 @@ const newCondition = () => {
   };
 };
 
+
 export default Component.extend({
   tagName: 'rule-form',
+
+  dataFields: [],
   rule: {
     rule_name: '',
     rule_description: '',
@@ -30,5 +33,8 @@ export default Component.extend({
       conditions.pushObject(newCondition());
       this.notifyPropertyChange('conditions');
     },
+    removeCondition(condition) {
+      this.get('conditions').removeObject(condition);
+    }
   },
 });
