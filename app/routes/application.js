@@ -9,6 +9,7 @@ export default Route.extend({
       material_priority: 'HIGH',
       output_type: 'price',
       output_type_data: 'float',
+      rules: [],
       data_fields: [
         {
           field_name_visible: 'Product Weight',
@@ -24,8 +25,35 @@ export default Route.extend({
           field_source: 'json::inventory_current_units',
           field_source_type: 'json',
         },
+        {
+          field_name_visible: 'Competitor Price',
+          field_description: 'Competitor Price',
+          field_name: 'competitor_price',
+          field_source: 'json::inventory_current_units',
+          field_source_type: 'json',
+        },
+        {
+          field_name_visible: 'Delivery Time in Days',
+          field_description: 'Delivery Time',
+          field_name: 'delivery_time',
+          field_source: 'json::inventory_current_units',
+          field_source_type: 'json',
+        },
+        {
+          field_name_visible: 'Country like DE, NL',
+          field_description: 'Country like DE, NL',
+          field_name: 'country',
+          field_source: 'json::inventory_current_units',
+          field_source_type: 'json',
+        },
+        {
+          field_name_visible: 'Seasonality',
+          field_description: 'Seasonality',
+          field_name: 'seasonality',
+          field_source: 'json::inventory_current_units',
+          field_source_type: 'json',
+        },
       ],
-      rules: [],
     };
   },
 });

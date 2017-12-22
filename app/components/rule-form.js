@@ -4,7 +4,7 @@ import Ember from 'ember';
 const newCondition = () => {
   return {
     name: '',
-    condition_sequence_number: '',
+    condition_sequence_number: 1,
     type: '',
     data_field: '',
     operator: '',

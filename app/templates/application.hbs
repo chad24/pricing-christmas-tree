@@ -1,8 +1,8 @@
-<div class="drawer" style="position: fixed; left: 0; top: 0; bottom: 0; width: 300px; border-right: 1px solid #cacaca;">
+{{!-- <div class="drawer" style="position: fixed; left: 0; top: 0; bottom: 0; width: 300px; border-right: 1px solid #cacaca;">
     <div class="drawer-entry" style="padding: 2em; background-color: #efefef; font-weight: bold;">
         {{model.material_name}}
     </div>
-</div>
+</div> --}}
 
 <div class="container" style="margin-top: 2em;">
     <h1>Material: {{model.material_name}}</h1>
@@ -28,6 +28,11 @@
                 {{/copy-button}}
                 <div style="margin-top: 2em; margin-bottom: 2em; "></div>
             {{/if}}
+            <button {{action 'postJson'}}>Post</button>
+            {{#if calculatedPrice}}
+                <h2 style="color: green;">Price: {{calculatedPrice}}</h2>
+            {{/if}}
+            <div style="margin-top: 2em; margin-bottom: 2em; "></div>
             {{highlight-js code=json lang="json" hasLineNumbers=false}}
             <div id="raw-json" style="position: fixed; top: -100000%; left: -10000%;">{{json}}</div>
         </div>
